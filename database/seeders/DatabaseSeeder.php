@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Post;
+use App\Models\Exam;
+use App\Models\Question;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +16,25 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+
+        Category::create([
+            'nama' => 'SBMPTN'
+        ]);
+        Category::create([
+            'nama' => 'CPNS'
+        ]);
+        Material::create([
+            'nama' => 'Matematika'
+        ]);
+        Material::create([
+            'nama' => 'Kimia'
+        ]);
+        Material::create([
+            'nama' => 'B. Indonesia'
+        ]);
+        Post::factory(10)->create();
+        Exam::factory(3)->create();
+        Question::factory(100)->create();
+
     }
 }
