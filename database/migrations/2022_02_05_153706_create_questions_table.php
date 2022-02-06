@@ -15,7 +15,7 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->integer('exam_id');
+            $table->unsignedBigInteger('exam_id');
             $table->text('image')->nullable();
             $table->text('question');
             $table->text('opt_a');
@@ -25,7 +25,7 @@ class CreateQuestionsTable extends Migration
             $table->text('opt_e');
             $table->text('key');
             $table->timestamps();
-            $table->foreign('material_id')->references('id')->on('materials');
+            $table->foreign('exam_id')->references('id')->on('exams')->onDelete('cascade');
         });
     }
 

@@ -15,8 +15,8 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->integer('material_id');
-            $table->integer('category_id')->nullable();
+            $table->unsignedBigInteger('material_id');
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->string('image');
             $table->string('slug');
             $table->string('author');
@@ -25,8 +25,8 @@ class CreatePostsTable extends Migration
             $table->text('body');
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
-            $table->foreign('material_id')->references('id')->on('materials');
-            $table->foreign('categories_id')->references('id')->on('categories');
+            $table->foreign('material_id')->references('id')->on('materials')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 

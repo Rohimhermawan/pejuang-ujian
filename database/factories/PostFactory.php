@@ -14,14 +14,14 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            'material_id' => rand(1,3),
-            'category_id' => rand(1,3),
-            'image' => $this->faker()->word(),
-            'slug' => $this->faker()->slug(3),
-            'author' => $this->faker()->name(),
-            'tittle' => $this->faker()->tittle(),
-            'excerpt' => $this->faker()->sentences(rand(5,20)),
-            'body' => $this->faker()->paragraphs(rand(4,10))
+            'material_id' => mt_rand(1,3),
+            'category_id' => mt_rand(1,2),
+            'image' => 'default',
+            'slug' => $this->faker->slug(),
+            'author' => $this->faker->name(),
+            'tittle' => $this->faker->sentence(mt_rand(1,3)),
+            'excerpt' => $this->faker->paragraph(mt_rand(1,2)),
+            'body' => $this->faker->paragraphs(mt_rand(4,10), true)
         ];
     }
 }

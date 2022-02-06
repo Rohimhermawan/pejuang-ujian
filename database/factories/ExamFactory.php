@@ -14,13 +14,13 @@ class ExamFactory extends Factory
     public function definition()
     {
         return [
-            'material_id' => rand(1,3),
-            'category_id' => rand(1,3),
-            'image' => $this->faker()->word(),
-            'slug' => $this->faker()->slug(rand(1,3)),
-            'tittle' => $this->faker()->tittle(),
-            'excerpt' => $this->faker()->sentences(rand(10,25)),
-            'quantity' => rand(1,20),
+            'material_id' => mt_rand(1,3),
+            'category_id' => mt_rand(1,2),
+            'image' => 'default',
+            'slug' => $this->faker->slug(),
+            'tittle' => $this->faker->sentence(mt_rand(1,3)),
+            'excerpt' => $this->faker->paragraph(mt_rand(1,2)),
+            'quantity' => mt_rand(1,20),
         ];
     }
 }
