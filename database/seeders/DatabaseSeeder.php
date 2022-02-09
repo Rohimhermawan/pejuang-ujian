@@ -20,19 +20,24 @@ class DatabaseSeeder extends Seeder
     {
 
         Category::create([
-            'name' => 'SBMPTN'
+            'name' => 'SBMPTN',
+            'slug' => 'sbmptn'
         ]);
         Category::create([
-            'name' => 'CPNS'
+            'name' => 'CPNS',
+            'slug' => 'cpns'
         ]);
         Material::create([
-            'name' => 'Matematika'
+            'name' => 'Matematika',
+            'slug' => 'matematika'
         ]);
         Material::create([
-            'name' => 'Kimia'
+            'name' => 'Kimia',
+            'slug' => 'kimia'
         ]);
         Material::create([
-            'name' => 'B. Indonesia'
+            'name' => 'B. Indonesia',
+            'slug' => 'b-indonesia'
         ]);
         Post::factory(20)->create();
         Exam::factory(3)->create();

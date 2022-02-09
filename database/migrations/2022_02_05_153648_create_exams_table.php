@@ -19,7 +19,7 @@ class CreateExamsTable extends Migration
             $table->unsignedBigInteger('category_id');
             $table->string('image');
             $table->string('Tittle');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->string('excerpt');
             $table->string('quantity');
             $table->timestamps();

@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FeatureController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +18,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/features', [FeatureController::class, 'index']);
+Route::get('/features/blog/{slug}', [FeatureController::class, 'viewBlog']);
+Route::get('/features/exam/{slug}', [FeatureController::class, 'viewExam']);
+Route::get('/features/fetchquestion/{id}', [FeatureController::class, 'fetchQuestion']);
+
+Route::get('/admin/dashboard', function() {return view('admin.dashboard');});
+Route::resource('/admin/posts', PostController::class);

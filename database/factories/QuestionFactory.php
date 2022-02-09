@@ -22,6 +22,7 @@ class QuestionFactory extends Factory
             'opt_d' => $this->faker->sentence(5),
             'opt_e' => $this->faker->sentence(5),
             'key' => $this->faker->randomElement(['a', 'b', 'c', 'd', 'e']),
+            'explanation' => $this->faker->sentence(mt_rand(5, 20))
         ];
     }
 }

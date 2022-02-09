@@ -18,7 +18,7 @@ class CreatePostsTable extends Migration
             $table->unsignedBigInteger('material_id');
             $table->unsignedBigInteger('category_id')->nullable();
             $table->string('image');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->string('author');
             $table->string('tittle');
             $table->text('excerpt');
