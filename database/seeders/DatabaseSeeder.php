@@ -8,6 +8,7 @@ use App\Models\Exam;
 use App\Models\Question;
 use App\Models\Category;
 use App\Models\Material;
+use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -39,6 +40,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'B. Indonesia',
             'slug' => 'b-indonesia'
         ]);
+        User::factory(3)->create();
         Post::factory(20)->create();
         Exam::factory(3)->create();
         Question::factory(100)->create();

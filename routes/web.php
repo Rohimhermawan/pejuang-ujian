@@ -25,3 +25,4 @@ Route::get('/features/fetchquestion/{id}', [FeatureController::class, 'fetchQues
 
 Route::get('/admin/dashboard', function() {return view('admin.dashboard');});
 Route::resource('/admin/posts', PostController::class);
+Route::get('/admin/post/createSlug', [PostController::class, 'createSlug']);

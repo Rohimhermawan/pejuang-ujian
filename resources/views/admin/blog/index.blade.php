@@ -4,12 +4,17 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+        <h1 class="h3 mb-2 text-gray-800">Posts</h1>
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                @if(session()->has('message'))
+                    <div class="alert alert-success">
+                        {{ session()->get('message') }}
+                    </div>
+                @endif
+                <h6 class="m-0 font-weight-bold badge bg-secondary p-2"><a href="/admin/posts/create" class="text-white">Tambah Posts</a></h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -31,7 +36,7 @@
                             </tr>
                         </tfoot>
                         <tbody>
-                          @foreach ($post as $post)
+                          @foreach ($posts as $post)
                           <tr>
                             <td>{{$loop->iteration}}</td>
                             <td>{{$post->tittle}}</td>
@@ -45,6 +50,9 @@
                           @endforeach
                         </tbody>
                     </table>
+                    <div class=" d-flex justify-content-center">
+                        {{$posts->links()}}
+                    </div>
                 </div>
             </div>
         </div>
