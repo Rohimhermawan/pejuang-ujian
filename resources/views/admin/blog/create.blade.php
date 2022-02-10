@@ -65,11 +65,12 @@
           <textarea type="text" class="form-control" id="body" name="body">{{old('body')}}</textarea>
         </div>
         <label class="input-group mb-3" for="image">Image</label>
+        <img class="image-preview img-fluid mb-2 col-sm-5">
         @error('image')   
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror    
         <div class="input-group mb-3">
-          <input type="file" class="form-co{{$errors->first('image', 'is-invalid')}}" id="image" name="image">
+          <input type="file" class="form-co{{$errors->first('image', 'is-invalid')}}" id="image" name="image" onchange="imagePreview()">
         </div>
         <button type="submit" class="btn btn-success">Create</button>    
       </form>
@@ -77,20 +78,5 @@
   </div>
 </div>
 <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
-<script>
-  const tittle = document.getElementById('tittle');
-  const slug = document.getElementById('slug');
-
-  tittle.addEventListener('change', function() {
-    fetch('/admin/post/createSlug?tittle=' + tittle.value)
-      .then(response => response.json())
-      .then(data => slug.value = data.slug)
-  });
-
-  const body = document.getElementById("body");
-     CKEDITOR.replace(body,{
-     language:'en-gb'
-   });
-   CKEDITOR.config.allowedContent = true;
-</script>
+<script src="{{asset('js/my.js')}}"></script>
 @endsection

@@ -56,15 +56,17 @@ class PostController extends Controller
         $validated['user_id'] = 1;
         $validated['excerpt'] = str::limit(strip_tags($validated['body']), 200);
         
-        $filenameWithExt = $request->file('image')->getClientOriginalName();
-        //Get just filename
-        $filename = $request->category_id . '_' . $request->slug;
-        // Get just ext
-        $extension = $request->file('image')->getClientOriginalExtension();
-        // Filename to store
-        $fileNameToStore = $filename.'_'.time().'.'.$extension;
-        // // Upload Image
-        $request->file('image')->storeAs('public/postsImage', $fileNameToStore, 'local');
+        if ($request->file(image)) {
+            $filenameWithExt = $request->file('image')->getClientOriginalName();
+            //Get just filename
+            $filename = $request->category_id . '_' . $request->slug;
+            // Get just ext
+            $extension = $request->file('image')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            // // Upload Image
+            $request->file('image')->storeAs('public/postsImage', $fileNameToStore, 'local');
+        }
         
         $validated['image'] = $fileNameToStore;
         post::create($validated);
@@ -79,9 +81,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        //
+        return view('admin.blog.show', compact('post'));
     }
 
     /**
@@ -90,9 +92,13 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        return view('admin.blog.edit', [
+            'post' => $post,
+            'categories' => category::all(),
+            'materials' => material::all()
+        ]);
     }
 
     /**
@@ -102,9 +108,42 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
-        //
+        $rules = ([
+            'tittle' => 'required|max:255',
+            'category_id' => 'required',
+            'image' => 'image|file|max:1024',
+            'body' => 'required',
+        ]);
+        if ($request->slug != $post->slug) {
+            $rules['slug'] = 'required|max:255|unique:posts';
+        }
+        
+        if ($request->file('image')) {
+            if ($request->oldImage) {
+                storage::delete($request->oldImage);
+            }
+            $filenameWithExt = $request->file('image')->getClientOriginalName();
+            //Get just filename
+            $filename = $request->slug;
+            // Get just ext
+            $extension = $request->file('image')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            // // Upload Image
+            $request->file('image')->storeAs('public/postsImage/'.$request->category_id, $fileNameToStore, 'local');
+        }
+
+        $validated = $request->validate($rules);
+        
+        $validated['image'] = $fileNameToStore;
+        $rules['user_id'] = 1;
+        $rules['excerpt'] = str::limit(strip_tags($rules['body']), 200);
+        post::where('id', $post->id)
+            ->update($validated);
+
+        return redirect('/admin/posts')->with('success', 'data has been updated successfully');
     }
 
     /**
@@ -113,9 +152,13 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+        if ($post->image) {
+            storage::delete($post->image);
+        }
+        post::destroy($post->id);
+        return redirect('/admin/posts')->with('success', 'data has been deleted successfully');
     }
 
     public function createSlug(Request $request)

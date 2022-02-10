@@ -43,7 +43,7 @@
             
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="/admin/dashboard">
                     <i width="16" height="16" data-feather="book"></i>
                     <span>Dashboard</span></a>
                 </li>
