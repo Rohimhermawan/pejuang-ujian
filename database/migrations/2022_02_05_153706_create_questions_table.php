@@ -24,7 +24,7 @@ class CreateQuestionsTable extends Migration
             $table->text('opt_d');
             $table->text('opt_e');
             $table->text('key');
-            $table->text('explanation');
+            $table->text('explaination')->nullable();
             $table->timestamps();
             $table->foreign('exam_id')->references('id')->on('exams')->onDelete('cascade');
         });

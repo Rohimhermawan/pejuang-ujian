@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ExamController;
+use App\Http\Controllers\QuestionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,5 +26,8 @@ Route::get('/features/exam/{slug}', [FeatureController::class, 'viewExam']);
 Route::get('/features/fetchquestion/{id}', [FeatureController::class, 'fetchQuestion']);
 
 Route::get('/admin/dashboard', function() {return view('admin.dashboard');});
-Route::resource('/admin/posts', PostController::class);
 Route::get('/admin/post/createSlug', [PostController::class, 'createSlug']);
+Route::get('/admin/exam/createSlug', [ExamController::class, 'createSlug']);
+Route::resource('/admin/posts', PostController::class);
+Route::resource('/admin/exams', ExamController::class);
+Route::resource('/admin/questions', QuestionController::class);

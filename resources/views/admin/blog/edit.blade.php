@@ -17,6 +17,7 @@
         @csrf
         @method('put')
         <input type="text" name="oldImage" hidden value="{{$post->image}}">
+        <input type="text" name="oldCategory" hidden value="{{$post->category_id}}">
           <label for="tittle" class="form-label">Tittle</label>
         @error('tittle')   
           <div class="alert alert-danger">{{ $message }}</div>
@@ -80,11 +81,27 @@
         <div class="input-group mb-3">
           <input type="file" class="form-co{{$errors->first('image', 'is-invalid')}}" id="image" name="image" onchange="imagePreview()">
         </div>
-        <button type="submit" class="btn btn-success">Update</button>    
+        <button type="submit" class="btn btn-warning">Update</button>    
       </form>
     </div>
   </div>
 </div>
 <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
-<script src="{{asset('js/my.js')}}"></script>
+<script src="{{asset('js/my.js')}}">
+const body = document.getElementById("body");
+     CKEDITOR.replace(body,{
+     language:'en-gb'
+   });
+   CKEDITOR.config.allowedContent = true;
+   
+const tittle = document.getElementById('tittle');
+const slug = document.getElementById('slug');
+
+  tittle.addEventListener('change', function() {
+    fetch('/admin/post/createSlug?tittle=' + tittle.value)
+      .then(response => response.json())
+      .then(data => slug.value = data.slug)
+  });
+
+</script>
 @endsection

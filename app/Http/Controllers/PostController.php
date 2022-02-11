@@ -50,22 +50,22 @@ class PostController extends Controller
             'tittle' => 'required|max:255',
             'slug' => 'required|max:255|unique:posts',
             'category_id' => 'required',
-            'image' => 'required|image|file|max:1024',
+            'image' => 'image|file|max:1024',
             'body' => 'required'
         ]);
         $validated['user_id'] = 1;
         $validated['excerpt'] = str::limit(strip_tags($validated['body']), 200);
         
-        if ($request->file(image)) {
+        if ($request->file('image')) {
             $filenameWithExt = $request->file('image')->getClientOriginalName();
             //Get just filename
-            $filename = $request->category_id . '_' . $request->slug;
+            $filename = $request->slug;
             // Get just ext
             $extension = $request->file('image')->getClientOriginalExtension();
             // Filename to store
             $fileNameToStore = $filename.'_'.time().'.'.$extension;
             // // Upload Image
-            $request->file('image')->storeAs('public/postsImage', $fileNameToStore, 'local');
+            $request->file('image')->storeAs('public/postsImage/'.$request->category_id, $fileNameToStore, 'local');
         }
         
         $validated['image'] = $fileNameToStore;
@@ -122,7 +122,7 @@ class PostController extends Controller
         
         if ($request->file('image')) {
             if ($request->oldImage) {
-                storage::delete($request->oldImage);
+                storage::disk('public')->delete('postsImage/'.$request->oldCategory.'/'.$request->oldImage);
             }
             $filenameWithExt = $request->file('image')->getClientOriginalName();
             //Get just filename
@@ -133,11 +133,11 @@ class PostController extends Controller
             $fileNameToStore = $filename.'_'.time().'.'.$extension;
             // // Upload Image
             $request->file('image')->storeAs('public/postsImage/'.$request->category_id, $fileNameToStore, 'local');
+            $validated['image'] = $fileNameToStore;
         }
 
         $validated = $request->validate($rules);
         
-        $validated['image'] = $fileNameToStore;
         $rules['user_id'] = 1;
         $rules['excerpt'] = str::limit(strip_tags($rules['body']), 200);
         post::where('id', $post->id)
@@ -155,7 +155,7 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         if ($post->image) {
-            storage::delete($post->image);
+            storage::disk('public')->delete('postsImage/'.$post->category_id.'/'.$post->image);
         }
         post::destroy($post->id);
         return redirect('/admin/posts')->with('success', 'data has been deleted successfully');

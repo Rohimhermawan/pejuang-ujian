@@ -9,9 +9,9 @@
     <div class="card-body">
       <form action="/admin/posts" method="post" enctype="multipart/form-data">
         @csrf
-        <label for="tittle" class="form-label">Tittle</label>
+          <label for="tittle" class="form-label">Tittle</label>
         @error('tittle')   
-        <div class="alert alert-danger">{{ $message }}</div>
+          <div class="alert alert-danger">{{ $message }}</div>
         @enderror
         <div class="input-group mb-3 col-md-6">
           <input type="text" class="form-control {{$errors->first('tittle', 'is-invalid')}}" id="tittle" name="tittle" value="{{old('tittle')}}">
@@ -21,35 +21,35 @@
           <input type="text" class="form-control {{$errors->first('slug', 'is-invalid')}}" readonly id="slug" name="slug" value="{{old('slug')}}">
         </div>
         @error('slug')   
-        <div class="alert alert-danger">{{ $message }}</div>
+          <div class="alert alert-danger">{{ $message }}</div>
         @enderror
         <label for="category_id" class="form-label">Category</label>
         @error('category_id')   
-        <div class="alert alert-danger">{{ $message }}</div>
+          <div class="alert alert-danger">{{ $message }}</div>
         @enderror
         <div class="input-group mb-3 col-md-6">
           <select class="form-select w-100 mb-3" name="category_id">
             @foreach ($categories as $category)
               @if ($category->id == old('category_id')) 
-              <option selected value="{{$category->id}}">{{$category->name}}</option>
+                <option selected value="{{$category->id}}">{{$category->name}}</option>
               @else
-              <option value="{{$category->id}}">{{$category->name}}</option>
+                <option value="{{$category->id}}">{{$category->name}}</option>
               @endif
             @endforeach
           </select>
         </div>
         @error('material_id')   
-        <label for="material_id" class="form-label">Material</label>
-        <div class="alert alert-danger">{{ $message }}</div>
+          <label for="material_id" class="form-label">Material</label>
+          <div class="alert alert-danger">{{ $message }}</div>
         @enderror
         <div class="input-group mb-3 col-md-6">
           <select class="form-select w-100 mb-3" name="material_id">
           <option value="">Tidak Ada</option>
           @foreach ($materials as $material)
               @if ($material->name == old('material_id')) 
-              <option selected value="{{$material->id}}">{{$material->name}}</option>
+                <option selected value="{{$material->id}}">{{$material->name}}</option>
               @else
-              <option value="{{$material->id}}">{{$material->name}}</option>
+                <option value="{{$material->id}}">{{$material->name}}</option>
               @endif
             @endforeach
           </select>
@@ -59,7 +59,7 @@
         </div>
         <label for="body" class="form-label">Body</label>
         @error('body')   
-        <div class="alert alert-danger">{{ $message }}</div>
+          <div class="alert alert-danger">{{ $message }}</div>
         @enderror
         <div class="input-group mb-3">
           <textarea type="text" class="form-control" id="body" name="body">{{old('body')}}</textarea>
@@ -67,7 +67,7 @@
         <label class="input-group mb-3" for="image">Image</label>
         <img class="image-preview img-fluid mb-2 col-sm-5">
         @error('image')   
-        <div class="alert alert-danger">{{ $message }}</div>
+          <div class="alert alert-danger">{{ $message }}</div>
         @enderror    
         <div class="input-group mb-3">
           <input type="file" class="form-co{{$errors->first('image', 'is-invalid')}}" id="image" name="image" onchange="imagePreview()">
@@ -78,5 +78,6 @@
   </div>
 </div>
 <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
-<script src="{{asset('js/my.js')}}"></script>
+<script src="{{asset('js/my.js')}}">
+</script>
 @endsection

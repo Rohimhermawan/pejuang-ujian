@@ -18,10 +18,11 @@ class CreateExamsTable extends Migration
             $table->unsignedBigInteger('material_id');
             $table->unsignedBigInteger('category_id');
             $table->string('image');
-            $table->string('Tittle');
+            $table->string('tittle');
             $table->string('slug')->unique();
             $table->string('excerpt');
             $table->string('quantity');
+            $table->timestamp('published_at');
             $table->timestamps();
             $table->foreign('material_id')->references('id')->on('materials')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');

@@ -89,7 +89,7 @@
                 
                 <!-- Nav Item - Tables -->
                 <li class="nav-item">
-                    <a class="nav-link" href="tables.html">
+                    <a class="nav-link" href="/admin/exams">
                         <i width="16" height="16" data-feather="book-open"></i>
                     <span>Soal</span></a>
                 </li>
