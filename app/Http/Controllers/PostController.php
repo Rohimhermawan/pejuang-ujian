@@ -71,7 +71,7 @@ class PostController extends Controller
         $validated['image'] = $fileNameToStore;
         post::create($validated);
         
-        return redirect('/admin/posts')->with('success', 'data has been created successfully');
+        return redirect('/admin/posts')->with('success', 'Post has been created successfully');
 
     }
 
@@ -143,7 +143,7 @@ class PostController extends Controller
         post::where('id', $post->id)
             ->update($validated);
 
-        return redirect('/admin/posts')->with('success', 'data has been updated successfully');
+        return redirect('/admin/posts')->with('success', 'Post has been updated successfully');
     }
 
     /**
@@ -158,7 +158,7 @@ class PostController extends Controller
             storage::disk('public')->delete('postsImage/'.$post->category_id.'/'.$post->image);
         }
         post::destroy($post->id);
-        return redirect('/admin/posts')->with('success', 'data has been deleted successfully');
+        return redirect('/admin/posts')->with('success', 'Post has been deleted successfully');
     }
 
     public function createSlug(Request $request)

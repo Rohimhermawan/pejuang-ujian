@@ -5,6 +5,8 @@ use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\MaterialController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +30,9 @@ Route::get('/features/fetchquestion/{id}', [FeatureController::class, 'fetchQues
 Route::get('/admin/dashboard', function() {return view('admin.dashboard');});
 Route::get('/admin/post/createSlug', [PostController::class, 'createSlug']);
 Route::get('/admin/exam/createSlug', [ExamController::class, 'createSlug']);
+Route::get('/admin/category/createSlug', [CategoryController::class, 'createSlug']);
 Route::resource('/admin/posts', PostController::class);
 Route::resource('/admin/exams', ExamController::class);
 Route::resource('/admin/questions', QuestionController::class);
+Route::resource('/admin/categories', CategoryController::class);
+Route::resource('/admin/materials', MaterialController::class);

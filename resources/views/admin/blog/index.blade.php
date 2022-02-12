@@ -31,9 +31,9 @@
                             </tr>
                         </tfoot>
                         <tbody>
-                          @foreach ($posts as $post)
+                          @foreach ($posts as $key => $post)
                           <tr>
-                            <td>{{$loop->iteration}}</td>
+                            <td>{{$posts->firstItem() + $key}}</td>
                             <td>{{$post->tittle}}</td>
                             <td>{{$post->published_at}}</td>
                             <td>

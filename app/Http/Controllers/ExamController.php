@@ -57,7 +57,7 @@ class ExamController extends Controller
         $validated['image'] = $fileNameToStore;
         exam::create($validated);
 
-        return redirect('/admin/exams')->with('success', 'data has been created successfully');
+        return redirect('/admin/exams')->with('success', 'Exam has been created successfully');
     }
 
     public function show(Exam $exam)
@@ -89,7 +89,7 @@ class ExamController extends Controller
         ]);
 
         if ($request->slug != $exam->slug) {
-            $rules['slug'] = 'required|max:255|unique:posts';
+            $rules['slug'] = 'required|max:255|unique:exams';
         }
         
         if ($request->file('image')) {
@@ -113,7 +113,7 @@ class ExamController extends Controller
         
         exam::where('id', $exam->id)
             ->update($validated);
-        return redirect('/admin/exams')->with('success', 'data has been updated successfully');
+        return redirect('/admin/exams')->with('success', 'Exam has been updated successfully');
     }
 
     public function destroy(Exam $exam)
@@ -122,7 +122,7 @@ class ExamController extends Controller
             storage::disk('public')->delete('examsImage/'.$exam->category_id .'/'. $exam->material_id .'/'.$exam->image);
         }
         exam::destroy($exam->id);
-        return redirect('/admin/exams')->with('success', 'data has been deleted successfully');
+        return redirect('/admin/exams')->with('success', 'Exam has been deleted successfully');
     }
 
     public function createSlug(Request $request)

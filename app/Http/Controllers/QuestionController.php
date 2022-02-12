@@ -59,7 +59,7 @@ class QuestionController extends Controller
         $validated['explanation'] = $request->explaination; 
         question::create($validated);
         
-        return redirect('/admin/exams/'.$exam->slug)->with('success', 'data has been created successfully');
+        return redirect('/admin/exams/'.$exam->slug)->with('success', 'Question has been created successfully');
     }
     public function show(Question $question)
     {
@@ -112,7 +112,7 @@ class QuestionController extends Controller
         question::where('id', $question->id)
                     ->update($validated);
         
-        return redirect('/admin/exams/'.$exam->slug)->with('success', 'data has been updated successfully');;
+        return redirect('/admin/exams/'.$exam->slug)->with('success', 'Question has been updated successfully');;
     }
 
     public function destroy(Question $question)
@@ -122,6 +122,6 @@ class QuestionController extends Controller
             storage::disk('public')->delete('questionsImage/' . $exam->category_id . '/' . $exam->material_id . '/' .$exam->slug.'/'.$question->oldImage);
         }
         question::destroy($question->id);
-        return redirect('/admin/exams/'.$exam->slug)->with('success', 'data has been deleted successfully');
+        return redirect('/admin/exams/'.$exam->slug)->with('success', 'Question has been deleted successfully');
     }
 }

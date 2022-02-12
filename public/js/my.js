@@ -1,7 +1,7 @@
 let url = document.location.pathname, urlFetch;
 let path = url.split("/")[2];
 
-if (path == 'posts' || path == 'exams') {
+if (path != 'questions') {
      if (path == 'posts') {
           const body = document.getElementById("body");
                CKEDITOR.replace(body,{
@@ -11,6 +11,10 @@ if (path == 'posts' || path == 'exams') {
           urlFetch = '/admin/post/createSlug?tittle=';
      } else if (path == 'exams') {
           urlFetch = '/admin/exam/createSlug?tittle=';
+     } else if (path == 'categories') {
+          urlFetch = '/admin/category/createSlug?tittle='
+     } else if (path == 'materials') {
+          urlFetch = '/admin/material/createSlug?tittle='
      }
         
      const tittle = document.getElementById('tittle');

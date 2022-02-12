@@ -37,9 +37,9 @@
                             </tr>
                         </tfoot>
                         <tbody>
-                          @foreach ($exams as $exam)
+                          @foreach ($exams as $key => $exam)
                           <tr>
-                            <td>{{$loop->iteration}}</td>
+                            <td>{{$exams->firstItem() + $key}}</td>
                             <td>{{$exam->tittle}}</td>
                             <td>{{$exam->published_at}}</td>
                             <td>{{$exam->excerpt}}</td>
