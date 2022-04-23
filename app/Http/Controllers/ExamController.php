@@ -7,6 +7,7 @@ use App\Models\Exam;
 use App\Models\Question;
 use App\Models\Category;
 use App\Models\Material;
+use Carbon\Carbon;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -129,5 +130,22 @@ class ExamController extends Controller
     {
         $slug = SlugService::createSlug(Exam::class, 'slug', $request->tittle);
         return response()->json(['slug' => $slug]);
+    }
+
+    public function publish(Exam $exam)
+    {
+        // dd($exam->published_at);
+        if ($exam->published_at == null) {
+            exam::where('id', $exam->id)
+                ->update([
+                    'published_at' => Carbon::now()->format("Y-m-d H:i:m")
+                ]);
+        } else {
+            exam::where('id', $exam->id)
+                ->update([
+                    'published_at' => null
+                ]);
+        }
+        return back();
     }
 }

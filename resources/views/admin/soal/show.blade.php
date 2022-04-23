@@ -15,7 +15,7 @@
       </div>
       <div class="row justify-content-center">
         <div class="col-md-10">
-          <ul class="list-group">
+          <ul class="list-group list-group-flush">
             <li class="list-group-item">A. {!! $question->opt_a !!}</li>
             <li class="list-group-item">B. {!! $question->opt_b !!}</li>
             <li class="list-group-item">C. {!! $question->opt_c !!}</li>

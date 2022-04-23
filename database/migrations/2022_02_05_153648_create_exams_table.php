@@ -22,7 +22,7 @@ class CreateExamsTable extends Migration
             $table->string('slug')->unique();
             $table->string('excerpt');
             $table->string('quantity');
-            $table->timestamp('published_at');
+            $table->timestamp('published_at')->nullable();
             $table->timestamps();
             $table->foreign('material_id')->references('id')->on('materials')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');

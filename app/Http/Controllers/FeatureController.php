@@ -14,9 +14,9 @@ class FeatureController extends Controller
     public function index()
     {
         if (request('feature') == 'blog') {
-            $data = post::filter(request(['search', 'category', 'material']))->with('category', 'material')->get();
+            $data = post::whereNotNull('published_at')->filter(request(['search', 'category', 'material']))->with('category', 'material')->paginate(9)->withQueryString();
         } else {
-            $data = exam::filter(request(['search', 'category', 'material']))->with('category', 'material')->get();
+            $data = exam::whereNotNull('published_at')->filter(request(['search', 'category', 'material']))->with('category', 'material')->paginate(9)->withQueryString();
         }
         $categories = category::all();
         $materials = material::all();

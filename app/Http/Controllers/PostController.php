@@ -7,17 +7,13 @@ use App\Models\Post;
 use App\Models\Material;
 use App\Models\Category;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return view('admin.blog.index', [
@@ -25,11 +21,6 @@ class PostController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('admin.blog.create', [
@@ -38,12 +29,6 @@ class PostController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -75,23 +60,11 @@ class PostController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show(Post $post)
     {
         return view('admin.blog.show', compact('post'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Post $post)
     {
         return view('admin.blog.edit', [
@@ -101,13 +74,6 @@ class PostController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Post $post)
     {
         $rules = ([
@@ -146,12 +112,6 @@ class PostController extends Controller
         return redirect('/admin/posts')->with('success', 'Post has been updated successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Post $post)
     {
         if ($post->image) {
@@ -165,5 +125,22 @@ class PostController extends Controller
     {
         $slug = SlugService::createSlug(Post::class, 'slug', $request->tittle);
         return response()->json(['slug' => $slug]);
+    }
+
+    public function publish(Post $post)
+    {
+        // dd($post, );
+        if ($post->published_at == null) {
+            post::where('id', $post->id)
+                ->update([
+                    'published_at' => Carbon::now()->format("Y-m-d H:i:m")
+                ]);
+        } else {
+            post::where('id', $post->id)
+                ->update([
+                    'published_at' => null
+                ]);
+        }
+        return back();
     }
 }

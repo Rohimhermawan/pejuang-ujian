@@ -44,6 +44,14 @@
                                 @method('delete')
                                 <button type="submit" class="btn badge bg-danger py-1 px-2 text-white" onclick="return confirm('Apakah anda yakin ingin menghapus post ini?')"><i width="16" height="16" data-feather="trash-2"></i></button>
                               </form>
+                              <form action="/admin/posts/publish/{{$post->slug}}" method="POST" class="d-inline">
+                                @csrf
+                                @if ($post->published_at == null)
+                                <button type="submit" class="btn badge bg-success py-1 px-2 text-white"><i width="16" height="16" data-feather="send"></i></button>
+                                @else
+                                <button type="submit" class="btn badge bg-secondary py-1 px-2 text-white"><i width="16" height="16" data-feather="skip-back"></i></button>
+                                @endif
+                              </form>
                             </td>
                           </tr>
                           @endforeach
