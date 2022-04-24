@@ -25,7 +25,7 @@
                             <div class="col-md-3 d-flex ms-auto justify-content-center align-items-center">
                                 <div class="text-center">
                                     <h4>Blog</h4>
-                                    <a href="/features?category=post" class="btn btn-success">See more</a>
+                                    <a href="/features?category=post" class="btn" style="background-color: #E3BEC6">See more</a>
                                 </div>
                             </div>
                         </div>
@@ -36,7 +36,7 @@
                             <div class="col-md-3 d-flex ms-auto justify-content-center align-items-center">
                                 <div class="text-center">
                                     <h4>Soal-Soal</h4>
-                                    <a href="/features?category=exam" class="btn btn-success">See more</a>
+                                    <a href="/features?category=exam" class="btn" style="background-color: #E3BEC6">See more</a>
                                 </div>
                             </div>
                         </div>

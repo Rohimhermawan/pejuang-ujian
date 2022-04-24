@@ -10,7 +10,7 @@
     <meta name="author" content="">
 
     <title>Pejuang Ujian | Admin</title>
-
+    <link rel="icon" type="image/x-icon" href="/img/berkas/icon-pu.png">
     <!-- Custom fonts for this template-->
     <script src="https://unpkg.com/feather-icons"></script>
     <link
@@ -28,12 +28,12 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #1572A1">
             
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                    <img src="/img/berkas/icon-pu.png" alt="Icon-Pejuang-Ujian" width="50px">
                 </div>
                 <div class="sidebar-brand-text mx-3">Pejuang Ujian</div>
             </a>
@@ -186,7 +186,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="/logout">Logout</a>
                 </div>
             </div>
         </div>

@@ -19,9 +19,11 @@
           <div id="option"></div>
         </div>
       </div>
-      <div class="row explanation d-none">
+      <div class="row explanation d-none bg-secondary mt-4">
         <div class="col-md-10">
-          <div id="explaination"></div>
+          <div id="explaination">
+
+          </div>
         </div>
       </div>
     </div>
@@ -37,7 +39,7 @@
             <ul id="showResult" class="list-group">
               
             </ul>
-            <p>Tekan tombol dua kali untuk menampilkan hasil terbaru</p>
+            <p class="text-dark">Tekan tombol dua kali untuk menampilkan hasil terbaru</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -109,7 +111,7 @@
       const number = document.querySelector('.number');
       const panel = document.querySelector('#panel');
       const option = document.querySelector('#option');
-      const explaination = document.querySelector('#explaination');
+      const explanation = document.querySelector('#explaination');
       let questions = [];
       fetch('/features/fetchquestion/' + {{$slug->id}})
         .then(response => response.json())
@@ -119,7 +121,7 @@
       number.addEventListener('click', (e) => {
         let no = e.target.id;
         panel.innerText = questions[no].question;
-        explaination.innerHTML = `<b>Jawaban : ${questions[no].key}</b><br>` + questions[no].explanation;
+        explanation.innerHTML = `<b>Jawaban : ${questions[no].key}</b><br>` + questions[no].explanation;
         option.innerHTML = getOption(questions[no], no);
         let answer = document.querySelector('.form-check-input');
     // css nomor
@@ -135,7 +137,6 @@
           if(key.includes(e.target.value)) {
             setCookie(e.target.name, e.target.value, "{{$slug->slug}}");
           }
-          console.log(document.cookie);
         });
     // cookies    
     function setCookie(name,value, slug) {
@@ -189,7 +190,7 @@
               <div class="form-check">
                 <input class="form-check-input" type="radio" name="nomor${no}" id="opt_e" value="e" ${getCookie("nomor"+no) == "e"? "checked":""}>
                 <label class="form-check-label" for="opt_e">${option.opt_e}</label>
-              </div>"`;
+              </div>`;
     }
     </script>
 @endsection

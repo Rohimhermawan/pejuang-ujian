@@ -8,7 +8,7 @@
       <div class="carousel-caption d-block">
         <h5>{{$data[0]->tittle}}</h5>
         <p>{{$data[0]->excerpt}}</p>
-        <a href="/features/{{request('feature')}}/{{$data[0]->slug}}" class="btn btn-primary">Get to Know</a>
+        <a href="/features/{{request('feature')}}/{{$data[0]->slug}}" class="btn" style="background-color:#E3BEC6">Lihat selengkapnya</a>
       </div>
     </div>
     <div class="carousel-item">
@@ -16,7 +16,7 @@
       <div class="carousel-caption d-block">
         <h5>{{$data[1]->tittle}}</h5>
         <p>{{$data[1]->excerpt}}</p>
-        <a href="/features/{{request('feature')}}/{{$data[1]->slug}}" class="btn btn-primary">Get to Know</a>
+        <a href="/features/{{request('feature')}}/{{$data[1]->slug}}" class="btn" style="background-color:#E3BEC6">Lihat selengkapnya</a>
       </div>
     </div>
     <div class="carousel-item">
@@ -24,7 +24,7 @@
       <div class="carousel-caption d-block">
         <h5>{{$data[2]->tittle}}</h5>
         <p>{{$data[2]->excerpt}}</p>
-        <a href="/features/{{request('feature')}}/{{$data[2]->slug}}" class="btn btn-primary">Get to Know</a>
+        <a href="/features/{{request('feature')}}/{{$data[2]->slug}}" class="btn" style="background-color:#E3BEC6">Lihat selengkapnya</a>
       </div>
     </div>
   </div>
@@ -73,11 +73,11 @@
     <div class="col-md-4 mb-3">
       <div class="card">
         <img src="https://source.unsplash.com/500x400?{{$post->category}}" class="card-img-top" alt="...">
-        <div class="card-body">
+        <div class="card-body bg-secondary">
           {{'#'.$post->material->name.' #'.$post->category->name}}
           <h5>{{$post->tittle}}</h5>
             <p>{{$post->excerpt}}</p>
-            <a href="/features/{{request('feature')}}/{{$post->slug}}" class="btn btn-primary">Get to Know</a>
+            <a href="/features/{{request('feature')}}/{{$post->slug}}" class="btn" style="background-color:#E3BEC6">Lihat selengkapnya</a>
         </div>
       </div>
     </div>
@@ -87,11 +87,11 @@
     <div class="col-md-4 mb-3">
       <div class="card">
         <img src="https://source.unsplash.com/500x400?{{$post->category}}" class="card-img-top" alt="...">
-        <div class="card-body">
+        <div class="card-body bg-secondary">
           {{'#'.$post->material->name.' #'.$post->category->name}}
           <h5>{{$post->tittle}}</h5>
             <p>{{$post->excerpt}}</p>
-            <a href="/features/{{request('feature')}}/{{$post->slug}}" class="btn btn-primary">Get to Know</a>
+            <a href="/features/{{request('feature')}}/{{$post->slug}}" class="btn" style="background-color:#E3BEC6">Lihat selengkapnya</a>
         </div>
       </div>
     </div>

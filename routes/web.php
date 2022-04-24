@@ -7,8 +7,7 @@ use App\Http\Controllers\ExamController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MaterialController;
-use App\Models\Exam;
-use App\Models\Post;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,38 +20,25 @@ use App\Models\Post;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', function () {return view('welcome');});
+Route::get('/login', function () {return view('login');});
+Route::post('/authenticate', [AdminController::class, 'authenticate']);
 Route::get('/features', [FeatureController::class, 'index']);
 Route::get('/features/blog/{slug}', [FeatureController::class, 'viewBlog']);
 Route::get('/features/exam/{slug}', [FeatureController::class, 'viewExam']);
 Route::get('/features/fetchquestion/{id}', [FeatureController::class, 'fetchQuestion']);
 
-Route::get('/admin/dashboard', function() {
-    $data = exam::all()->count();
-    $data2 = exam::whereNotNull('published_at', null)->count();
-    $exam = [
-        "publish"=>$data2,
-        "pending"=>$data-$data2,
-        "total"=> $data
-    ];
-    $data = post::all()->count();
-    $data2 = post::whereNotNull('published_at', null)->count();
-    $post = [
-        "publish"=>$data2,
-        "pending"=>$data-$data2,
-        "total"=> $data
-    ];
-    return view('admin.dashboard', compact('exam', 'post'));
+Route::middleware(['auth'])->group(function () {
+  Route::get('/logout', [AdminController::class, 'logout']);
+  Route::get('/admin/dashboard', [AdminController::class, 'index']);
+  Route::get('/admin/post/createSlug', [PostController::class, 'createSlug']);
+  Route::get('/admin/exam/createSlug', [ExamController::class, 'createSlug']);
+  Route::get('/admin/category/createSlug', [CategoryController::class, 'createSlug']);
+  Route::post('/admin/posts/publish/{post}', [PostController::class, 'publish']);
+  Route::resource('/admin/posts', PostController::class);
+  Route::post('/admin/exams/publish/{exam}', [ExamController::class, 'publish']);
+  Route::resource('/admin/exams', ExamController::class);
+  Route::resource('/admin/questions', QuestionController::class);
+  Route::resource('/admin/categories', CategoryController::class);
+  Route::resource('/admin/materials', MaterialController::class);
 });
-Route::get('/admin/post/createSlug', [PostController::class, 'createSlug']);
-Route::get('/admin/exam/createSlug', [ExamController::class, 'createSlug']);
-Route::get('/admin/category/createSlug', [CategoryController::class, 'createSlug']);
-Route::post('/admin/posts/publish/{post}', [PostController::class, 'publish']);
-Route::resource('/admin/posts', PostController::class);
-Route::post('/admin/exams/publish/{exam}', [ExamController::class, 'publish']);
-Route::resource('/admin/exams', ExamController::class);
-Route::resource('/admin/questions', QuestionController::class);
-Route::resource('/admin/categories', CategoryController::class);
-Route::resource('/admin/materials', MaterialController::class);

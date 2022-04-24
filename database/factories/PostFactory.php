@@ -16,7 +16,7 @@ class PostFactory extends Factory
         return [
             'material_id' => mt_rand(1,3),
             'category_id' => mt_rand(1,2),
-            'user_id' => mt_rand(1,2),
+            'user_id' => 1,
             'image' => 'default',
             'slug' => $this->faker->unique()->slug(),
             'tittle' => $this->faker->sentence(mt_rand(1,3)),

@@ -9,6 +9,8 @@ use App\Models\Question;
 use App\Models\Category;
 use App\Models\Material;
 use App\Models\User;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -40,7 +42,13 @@ class DatabaseSeeder extends Seeder
             'name' => 'B. Indonesia',
             'slug' => 'b-indonesia'
         ]);
-        User::factory(3)->create();
+        User::create([
+            'name' => "Rohim Hermawan",
+            'email' => "rohimhermawan01@gmail.com",
+            'email_verified_at' => now(),
+            'password' => Hash::make("muhamad123"),
+            'remember_token' => Str::random(10),
+        ]);
         Post::factory(20)->create();
         Exam::factory(3)->create();
         Question::factory(100)->create();
