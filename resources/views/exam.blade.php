@@ -1,6 +1,6 @@
 @extends('layouts.ui')
 @section('main')
-    <div class="container my-5 px-4 text-medium">
+    <div class="container my-5 px-4 text-medium" onload="click()">
       <div class="row">
         <div class="col-sm-4 bg-dark mb-3 d-flex py-2">
           <div id="timer" class="text-white"></div>
@@ -32,14 +32,16 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="resultLabel">Hasil</h5>
+            <h5 class="modal-title text-dark" id="resultLabel">Hasil</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <ul id="showResult" class="list-group">
               
             </ul>
-            <p class="text-dark">Tekan tombol dua kali untuk menampilkan hasil terbaru</p>
+            <p class="text-dark">Alhamdulillah kamu sudah melakukan latihan soal pada topik <b>{{$slug->judul}}</b>, yuk review jawaban yang salah dan pelajari kembali!
+            <br><br>  
+            Tekan tombol dua kali untuk menampilkan hasil terbaru</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -52,8 +54,29 @@
     <button type="button" class="btn btn-primary d-none" data-bs-toggle="modal" id="pomodoro" data-bs-target="#pomodoroModal">
       Launch static backdrop modal
     </button>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop1" id="bismillah" hidden>
+      Launch static backdrop modal
+    </button>
 
     <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-dark" id="staticBackdropLabel">Persiapan sebelum memulai</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p class="text-dark">
+              Sebelum belajar, yuk kita berdoa terlebih dahulu dan jangan lupa siapkan air minum disekitarmu ^^
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">okay sudah</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="modal fade" id="pomodoroModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -93,9 +116,9 @@
                         }
                         timer.innerHTML = `${hours} jam ${minutes} menit ${seconds} detik`;
                         }, 1000);
-            }
-      button.addEventListener('click', (e) => {
-        if (e.target.innerText == 'Start') {
+                      }
+                      button.addEventListener('click', (e) => {
+                        if (e.target.innerText == 'Start') {
             e.target.innerText = 'Reset';
             e.target.classList.remove('btn-success');
             e.target.classList.add('btn-danger');
@@ -112,6 +135,7 @@
       const panel = document.querySelector('#panel');
       const option = document.querySelector('#option');
       const explanation = document.querySelector('#explaination');
+      window.addEventListener('load', (e) => {document.getElementById("bismillah").click();});
       let questions = [];
       fetch('/features/fetchquestion/' + {{$slug->id}})
         .then(response => response.json())
@@ -129,9 +153,9 @@
           if (getCookie("nomor"+index)) {
               let add = document.getElementById(index).classList.add("bg-success");
               let remove = document.getElementById(index).classList.remove("bg-warning");
+            }
           }
-        }
-    });
+        });
         const key = ['a', 'b', 'c', 'd', 'e'];
         option.addEventListener('click', (e) => {
           if(key.includes(e.target.value)) {
@@ -192,5 +216,6 @@
                 <label class="form-check-label" for="opt_e">${option.opt_e}</label>
               </div>`;
     }
+      
     </script>
 @endsection

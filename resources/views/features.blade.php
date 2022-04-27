@@ -84,7 +84,7 @@
     @endforeach
     @else
     @foreach ($data as $post)    
-    <div class="col-md-4 mb-3">
+    <div class="col-md-4 mb-3 cards" data-aos="flip-left" data-aos-duration="500" data-aos-delay="{{$loop->iteration*100}}">
       <div class="card">
         <img src="https://source.unsplash.com/500x400?{{$post->category}}" class="card-img-top" alt="...">
         <div class="card-body bg-secondary">
@@ -102,4 +102,14 @@
     {{ $data->links() }}
   </div>
 </div>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({
+      once:true
+    });
+    const card = document.querySelectorAll(".cards");
+    card.addEventListener('hover', function(e) {
+      e.target.dataset.aos = "zoom-in";
+    });
+</script>
 @endsection
